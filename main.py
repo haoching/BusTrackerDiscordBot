@@ -19,4 +19,5 @@ async def on_ready():
 async def hello(interaction: nextcord.Interaction):
     await interaction.send("Hello!")
 
+
 bot.run(token)
