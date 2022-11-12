@@ -3,6 +3,7 @@ from pprint import pprint
 import json
 from os import environ
 from dotenv import load_dotenv
+
 load_dotenv()
 
 id = environ["TDX_ClientId"]
@@ -54,4 +55,3 @@ if __name__ == '__main__':
     pprint(auth_response.text)
     print(data_response)
     pprint(data_response.text)
-
