@@ -15,6 +15,10 @@ python3 -m pip install -U nextcord
 # Windows
 py -3 -m pip install -U nextcord
 ```
+### request
+```
+pip install requests
+```
 ### dotenv
 - [dotenv](https://pypi.org/project/python-dotenv/)
 ####install dotenv
