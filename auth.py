@@ -12,7 +12,7 @@ app_id = id
 app_key = key
 
 auth_url="https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token"
-url = "https://tdx.transportdata.tw/api/basic/v2/Rail/TRA/LiveTrainDelay?$top=30&$format=JSON"
+url = "https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeByFrequency/City/Taichung?%24top=30&%24format=JSON"
 
 class Auth():
 
