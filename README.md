@@ -8,7 +8,7 @@ Taichung bus tracker
 - [nextcord](https://pypi.org/project/nextcord/)
 #### install nextcord
 
-```
+```shell
 # Linux/macOS
 python3 -m pip install -U nextcord
 
@@ -16,14 +16,14 @@ python3 -m pip install -U nextcord
 py -3 -m pip install -U nextcord
 ```
 ### request
-```
+```shell
 pip install requests
 ```
 ### dotenv
 - [dotenv](https://pypi.org/project/python-dotenv/)
 
 #### install dotenv
-```
+```shell
 pip install python-dotenv
 ```
 #### add .env file
