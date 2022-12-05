@@ -19,9 +19,6 @@ def GetBusInfo(url):
     d = auth.data(auth.app_id, auth.app_key, auth_response)
     data_response = auth.requests.get(url, headers=d.get_data_header())
     return data_response.json()
-#path = 'temp.json'
-#with open(path, 'w') as f:
-#    json.dump(GetBusInfo('https://tdx.transportdata.tw/api/basic/v2/Rail/TRA/LiveTrainDelay?$top=30&$format=JSON'), f)
 
 RealTimeNearStop_url = 'https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeNearStop/City/Taichung?%24top=300&%24format=JSON'
     
@@ -50,16 +47,16 @@ async def on_ready():
 
 
 
-@bot.slash_command(description="My first slash command", guild_ids=[TESTING_GUILD_ID])
+@bot.slash_command(description="My first slash command", guild_ids=None)
 async def bus(interaction: nextcord.Interaction,req_route : str):
     ##dump json to debug##
     #path = 'temp.json'
     #with open(path, 'w') as f:
     #    json.dump(GetBusInfo(RealTimeNearStop_url), f)
-    embedVar = nextcord.Embed(title="Title", description="Desc", color=0x00ff00)
+    embedVar = nextcord.Embed(title=req_route, description="公車位置", color=0x7FFFD4)
     for bus_info in GetBusInfo(RealTimeNearStop_url):
         if bus_info['RouteName']['Zh_tw'] == req_route:
-            embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['RouteName']['Zh_tw'], inline=False)
+            embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw'], inline=False)
     await interaction.send(embed=embedVar)
 
 

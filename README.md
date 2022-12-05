@@ -3,7 +3,7 @@ Taichung bus tracker
 
 
 ## setting
-`蒿吐開始你的機器人`
+`how to 開始你的機器人`
 ### nextcord
 - [nextcord](https://pypi.org/project/nextcord/)
 #### install nextcord
@@ -20,6 +20,7 @@ py -3 -m pip install -U nextcord
 pip install requests
 ```
 ### dotenv
+幫助你更安全的處存token
 - [dotenv](https://pypi.org/project/python-dotenv/)
 
 #### install dotenv
@@ -35,7 +36,7 @@ TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 TDX_ClientId=XXXXX-XXXXXXXX-XXXX-XXXX
 TDX_ClientSecret=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 ```
-![api key](https://github.com/haoching/BusTrackerDiscordBot/blob/main/readmeimg/tdxtoken.png?raw=true)
+![api key](https://raw.githubusercontent.com/haoching/BusTrackerDiscordBot/main/image/tdxtoken.png)
 ### 
 
 
