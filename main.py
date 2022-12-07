@@ -55,16 +55,16 @@ async def bus(interaction: nextcord.Interaction,req_route : str):
     #    json.dump(GetBusInfo(RealTimeNearStop_url), f)
     embedVar = nextcord.Embed(title=req_route, description="公車位置", color=0x7FFFD4)
     bus = [[],[]]
-    for bus_info in GetBusInfo(RealTimeNearStop_url):
-        if bus_info['RouteName']['Zh_tw'] == req_route:
-            if bus_info['Direction']:
-                bus[0].append(bus_info)
+    for raw_bus_info in GetBusInfo(RealTimeNearStop_url):
+        if raw_bus_info['RouteName']['Zh_tw'] == req_route:
+            if raw_bus_info['Direction']:
+                bus[0].append(raw_bus_info)
             else:
-                bus[1].append(bus_info)
-    for i in bus[0]:
-        embedVar.add_field(name=i['PlateNumb'], value=i['StopName']['Zh_tw']+str(i['Direction']), inline=False)
-    for i in bus[1]:
-        embedVar.add_field(name=i['PlateNumb'], value=i['StopName']['Zh_tw']+str(i['Direction']), inline=False)
+                bus[1].append(raw_bus_info)
+    for bus_info in bus[0]:
+        embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw']+str(bus_info['Direction']), inline=False)
+    for bus_info in bus[1]:
+        embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw']+str(bus_info['Direction']), inline=False)
     await interaction.send(embed=embedVar)
 
 
