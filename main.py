@@ -20,7 +20,7 @@ def GetBusInfo(url):
     data_response = auth.requests.get(url, headers=d.get_data_header())
     return data_response.json()
 
-RealTimeNearStop_url = 'https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeNearStop/City/Taichung?%24top=300&%24format=JSON'
+RealTimeNearStop_url = 'https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeNearStop/City/Taichung?%24top=1000&%24format=JSON'
     
 
 def get_json(self, url):
@@ -56,7 +56,7 @@ async def bus(interaction: nextcord.Interaction,req_route : str):
     embedVar = nextcord.Embed(title=req_route, description="公車位置", color=0x7FFFD4)
     for bus_info in GetBusInfo(RealTimeNearStop_url):
         if bus_info['RouteName']['Zh_tw'] == req_route:
-            embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw'], inline=False)
+            embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw']+str(bus_info['Direction']), inline=False)
     await interaction.send(embed=embedVar)
 
 
