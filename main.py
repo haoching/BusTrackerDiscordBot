@@ -61,8 +61,10 @@ async def bus(interaction: nextcord.Interaction,req_route : str):
                 bus[0].append(bus_info)
             else:
                 bus[1].append(bus_info)
-                
-    embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw']+str(bus_info['Direction']), inline=False)
+    for i in bus[0]:
+        embedVar.add_field(name=i['PlateNumb'], value=i['StopName']['Zh_tw']+str(i['Direction']), inline=False)
+    for i in bus[1]:
+        embedVar.add_field(name=i['PlateNumb'], value=i['StopName']['Zh_tw']+str(i['Direction']), inline=False)
     await interaction.send(embed=embedVar)
 
 
