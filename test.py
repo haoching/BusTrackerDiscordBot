@@ -1,20 +1,63 @@
+import nextcord
+from nextcord.ext import commands
+from os import environ
+from dotenv import load_dotenv
+import auth
 import json
+import requests
 
-characters = "\\"
-path = 'temp.json'
+load_dotenv()
 
-with open('temp.json') as f:
-    data = json.load(f)
+token = environ["TOKEN"]
 
-#for x in range(len(characters)):
-#    data = data.replace(characters[x],"")
+TESTING_GUILD_ID = 872415885321732117  # Replace with your guild ID
 
-with open(path, 'w') as f:
-    json.dump(data,f)
+#GetBusInfo(url) return response
+def GetBusInfo(url):
+    a = auth.Auth(auth.app_id, auth.app_key)
+    auth_response = auth.requests.post(auth.auth_url, a.get_auth_header())
+    d = auth.data(auth.app_id, auth.app_key, auth_response)
+    data_response = auth.requests.get(url, headers=d.get_data_header())
+    return data_response.json()
+
+RealTimeNearStop_url = 'https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeNearStop/City/Taichung?%24top=300&%24format=JSON'
+StopOfRoute = 'https://tdx.transportdata.tw/api/basic/v2/Bus/StopOfRoute/City/Taichung?%24top=700&%24format=JSON'
+
+def get_json(self, url):
+    headers = {'authorization': f'Bearer {self.get_token()}'}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        j = response.json()
+        response.close()
+        return j
+    else:
+        return {
+            'error_code': response.status_code,
+            'text': response.text
+        }
+
+def get_key(dict,value):
+    return[k for k, v in dict.items() if v == value]
+
+bot = commands.Bot()
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
 
 
-with open('temp.json') as f:
-    s = json.load(f)
-print (data)
-print (s)
-print(type(s))
+
+@bot.slash_command(description="My first slash command", guild_ids=None)
+async def bus(interaction: nextcord.Interaction,req_route : str):
+    ##dump json to debug##
+    path = 'temp.json'
+    with open(path, 'w') as f:
+        json.dump(GetBusInfo(StopOfRoute), f)
+    embedVar = nextcord.Embed(title=req_route, description="公車位置", color=0x7FFFD4)
+    for bus_info in GetBusInfo(RealTimeNearStop_url):
+        if bus_info['RouteName']['Zh_tw'] == req_route:
+            embedVar.add_field(name=bus_info['PlateNumb'], value=bus_info['StopName']['Zh_tw'], inline=False)
+    await interaction.send(embed=embedVar)
+
+
+bot.run(token)

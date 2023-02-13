@@ -21,7 +21,7 @@ def GetBusInfo(url):
     return data_response.json()
 
 RealTimeNearStop_url = 'https://tdx.transportdata.tw/api/basic/v2/Bus/RealTimeNearStop/City/Taichung?%24top=300&%24format=JSON'
-    
+StopOfRoute = 'https://tdx.transportdata.tw/api/basic/v2/Bus/StopOfRoute/City/Taichung?%24top=700&%24format=JSON'
 
 def get_json(self, url):
     headers = {'authorization': f'Bearer {self.get_token()}'}

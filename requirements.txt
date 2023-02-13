@@ -1,0 +1,7 @@
+nextcord
+nextcord.ext
+os
+dotenv
+auth
+json
+requests

@@ -1,2 +1,5 @@
 .env
+*.CSV
 __pycache__/*
+*test*
+tempCodeRunnerFile.py
